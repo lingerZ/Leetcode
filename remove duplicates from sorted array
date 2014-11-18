@@ -1,0 +1,32 @@
+/*
+Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
+
+Do not allocate extra space for another array, you must do this in place with constant memory.
+
+For example,
+Given input array A = [1,1,2],
+
+Your function should return length = 2, and A is now [1,2].
+*/
+public class Solution {
+    public int removeDuplicates(int[] A) {
+       
+       int next=1;
+       int oldLength=A.length;
+       int newLength=A.length;
+       for(int current=0;current<newLength;current++)
+       {
+            while( next<oldLength && A[current]==A[next] )
+            {
+              next ++;
+              newLength--;
+            }
+            if(next<oldLength && current+1 != next)
+               A[current+1]=A[next];
+           next++;
+        }
+      
+       return newLength;
+        
+    }
+}
