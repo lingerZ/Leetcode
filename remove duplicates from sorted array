@@ -11,22 +11,11 @@ Your function should return length = 2, and A is now [1,2].
 public class Solution {
     public int removeDuplicates(int[] A) {
        
-       int next=1;
-       int oldLength=A.length;
-       int newLength=A.length;
-       for(int current=0;current<newLength;current++)
-       {
-            while( next<oldLength && A[current]==A[next] )
-            {
-              next ++;
-              newLength--;
-            }
-            if(next<oldLength && current+1 != next)
-               A[current+1]=A[next];
-           next++;
-        }
-      
-       return newLength;
-        
+        int n=A.length;
+       if(n < 2) return n;
+        int id = 1;
+        for(int i = 1; i < n; ++i) 
+            if(A[i] != A[i-1]) A[id++] = A[i];
+        return id;
     }
 }
