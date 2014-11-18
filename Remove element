@@ -8,13 +8,15 @@ public class Solution {
         int front=0;
         int back=A.length-1;
         int newLength=A.length;
-        for(int i=0;i<newLength;i++)
+        while (front<=back)
         {
-            while(A[i]==elem && back>=i)
+            if(A[front]==elem)
             {
-                A[i]=A[back--];
+                A[front]=A[back--];
                 newLength--;
             }
+            else
+            front++;
                
         }
         return newLength;
