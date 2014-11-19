@@ -16,23 +16,30 @@ Given 1->1->2->3->3, return 1->2->3.
  *     }
  * }
  */
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
        if(head==null)
           return null;
        ListNode current = head;
-       ListNode runner = head.next; 
-       while(runner !=null)
+       while(current != null && current.next !=null)
        {
-           if(current.val!=runner.val)
-           {
-               current.next=runner;
-               current=current.next;
-           }
-           runner=runner.next;
-           
+           if(current.val==current.next.val)
+            current.next=current.next.next;
+           else
+            current=current.next;
        }
-       current.next=null;
+      
        return head;
     }
 }
