@@ -14,10 +14,35 @@ public class Solution {
     public int minDepth(TreeNode root) {
         if(root==null)
            return 0;
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        TreeNode divider=new TreeNode(0);
+        int depth=1;
+        q.add(root);
+        q.add(divider);
+        while(!q.isEmpty())
+        {
+            TreeNode cur=q.poll();
+            if(cur.equals(divider))
+            {
+                if(q.isEmpty())
+                   return depth;
+                else
+                {
+                   q.add(divider);
+                   depth++;
+                   continue;
+                }   
+            }
+            if(cur.left==null && cur.right==null)
+               return depth;
+            if(cur.left!=null)
+               q.add(cur.left);
+            if(cur.right!=null)
+               q.add(cur.right);
+            
+        }
+        return depth;
         
-        if(root.left==null || root.right==null)
-           return root.left==null?minDepth(root.right)+1:minDepth(root.left)+1;
-        return Math.min(minDepth(root.left),minDepth(root.right))+1;
+        
     }
-    
 }
