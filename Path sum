@@ -14,25 +14,11 @@ Given the below binary tree and sum = 22,
  * }
  */
 public class Solution {
-    
     public boolean hasPathSum(TreeNode root, int sum) {
-        return hasPathSumHelper(root,sum,0);
-           
+        if(root == null) return false;
+
+        if(root.left == null && root.right == null && sum - root.val == 0) return true;
+
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
-     public boolean hasPathSumHelper(TreeNode root, int sum,int subsum) {
-        if(root==null)
-           return false;
-        subsum+=root.val;
-        if(root.left==null && root.right==null)
-        {
-           if(subsum==sum)
-              return true;
-           else
-              return false;
-        }
-        
-        return hasPathSumHelper(root.left,sum,subsum) || hasPathSumHelper(root.right,sum,subsum);
-           
-    }
-     
 }
