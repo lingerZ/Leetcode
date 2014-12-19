@@ -1,0 +1,22 @@
+ if(head==null)
+           return null;
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast.next!=null && n>0)
+        {
+           fast=fast.next;
+           n--;
+        }
+        if(n>1)
+           return null;
+        if(n==1)
+           return head.next;
+        
+        while(fast.next != null)
+        {
+            fast=fast.next;
+            slow=slow.next;
+        }
+        
+        slow.next=slow.next.next;
+        return head;
