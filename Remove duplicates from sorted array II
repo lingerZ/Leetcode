@@ -25,3 +25,21 @@ public class Solution {
         
     }
 }
+
+/**
+ * Solution:
+ * Only difference is now we allow two duplicates. So we scan through the 
+ * array and if we find the 3rd duplicate we just skip them.
+ * We know it's 3rd duplicate by comparing the itor with second last elements in
+ * final array (if A[itor] == A[len-2], then A[itor]==A[len-2]==A[len-1])
+ */
+int removeDuplicates(int A[], int n) {
+    if (n <= 2) return n;       // no need to deal with n<=2 case.
+    int len = 2, itor = 2;
+    while (itor < n) {
+        if (A[itor] != A[len-2]) 
+            A[len++] = A[itor];
+        itor++;
+    }
+    return len;
+}
