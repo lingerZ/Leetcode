@@ -1,0 +1,69 @@
+/*
+Given an array S of n integers, are there elements a, b, c, and d in S such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
+
+Note:
+Elements in a quadruplet (a,b,c,d) must be in non-descending order. (ie, a ≤ b ≤ c ≤ d)
+The solution set must not contain duplicate quadruplets.
+    For example, given array S = {1 0 -1 0 -2 2}, and target = 0.
+
+    A solution set is:
+    (-1,  0, 0, 1)
+    (-2, -1, 1, 2)
+    (-2,  0, 0, 2)
+*/
+public class Solution {
+    public List<List<Integer>> fourSum(int[] num, int target) {
+        List<List<Integer>> res=new ArrayList<>();
+        if(num.length<4) return res;
+        Arrays.sort(num);
+        
+        for(int a=0; a<num.length-3;a++)
+        {
+            if(target>0 && num[a]>=target)
+               return res;
+            if(a>0 && num[a]==num[a-1]) continue;
+            for(int b=a+1;b<num.length-2;b++)
+            {
+                if(target-num[a]>0 && num[b]>=target-num[a])
+                   break;
+                if(b>a+1 && num[b]==num[b-1]) continue;
+                int c=b+1;
+                int d=num.length-1;
+                while(c<d)
+                {
+                    if(target-num[a]-num[b]>0 && num[c]>=target-num[a]-num[b])
+                       break;
+                    int cur=num[a]+num[b]+num[c]+num[d];
+                    if(cur==target)
+                    {
+                        ArrayList<Integer> curRes=new ArrayList<Integer>();
+                        curRes.add(num[a]);
+                        curRes.add(num[b]);
+                        curRes.add(num[c]);
+                        curRes.add(num[d]);
+                        res.add(curRes);
+                        do{c++;}
+                       while(c<d &&num[c]==num[c-1]);
+                       do{d--;}
+                       while(c<d && num[d]==num[d+1])  ;   
+                    }
+                    else if (cur>target)
+                    {
+                        do{d--;}
+                       while(c<d && num[d]==num[d+1])  ;   
+                    }
+                    else
+                    {
+                         do{c++;}
+                       while(c<d &&num[c]==num[c-1]);
+                       
+                    }
+                }
+                
+            }
+        }
+        return res;
+        
+        
+    }
+}
