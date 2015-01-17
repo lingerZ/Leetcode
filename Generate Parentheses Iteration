@@ -1,0 +1,23 @@
+public class Solution {
+    public ArrayList<String> generateParenthesis(int n) {
+        ArrayList<String> al=new ArrayList<String>();
+        
+        Queue<Element> q=new LinkedList<Element>();
+        q.add(new Element("",0,0));
+        while(!q.isEmpty()){
+            Element e=q.poll();
+            if(e.left==n && e.right==n){
+                al.add(e.str);
+            }
+            else{
+                if(e.left<n)
+                    q.add(new Element(e.str+"(", e.left+1,e.right));
+                
+                if(e.left>e.right)
+                    q.add(new Element(e.str+")",e.left,e.right+1));
+            }
+        }
+        
+        return al;
+    } 
+}
