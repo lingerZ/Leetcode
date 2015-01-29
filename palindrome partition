@@ -1,0 +1,50 @@
+/*
+Given a string s, partition s such that every substring of the partition is a palindrome.
+
+Return all possible palindrome partitioning of s.
+
+For example, given s = "aab",
+*/
+
+public class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> ret=new ArrayList<List<String>>();
+        List<String> cur=new ArrayList<String>();
+        
+        partitionHelper(s,0,cur,ret);
+        
+        return ret;
+    }
+    public void partitionHelper(String s, int start,List<String> current,List<List<String>> finalResult){
+        //base case
+        if(start>=s.length()){
+           finalResult.add(new ArrayList<String>(current));
+           return;
+        }
+        
+        //recursion
+        for(int i=start;i<s.length();i++)
+        {
+            String sub=s.substring(start,i+1);
+            if(isParlindrome(sub)){
+               current.add(sub);
+               partitionHelper(s,i+1,current,finalResult);
+               current.remove(current.size()-1);
+            }
+        }
+        
+    }
+    public boolean isParlindrome(String sub){
+        int left=0;
+        int right=sub.length()-1;
+        
+        while(left<right)
+        {
+            if(sub.charAt(left++)!=sub.charAt(right--))
+               return false;
+           
+        }
+        return true;
+        
+    }
+}
